@@ -1,12 +1,16 @@
 // Create web server
-// Run: node comments.js
-const http = require('http');
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!');
-});
 
-server.listen(3000, 'localhost', () => {
-    console.log('Server running at http://localhost:3000/');
-});
+// Import modules
+const express = require('express');
+const router = express.Router();
+const commentController = require('../controllers/commentController');
+
+// Define routes
+router.get('/', commentController.index);
+router.get('/:id', commentController.detail);
+router.post('/', commentController.create);
+router.put('/:id', commentController.update);
+router.delete('/:id', commentController.delete);
+
+// Export module
+module.exports = router;
